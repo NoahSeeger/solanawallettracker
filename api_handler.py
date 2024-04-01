@@ -87,8 +87,8 @@ def get_solana_price():
     try:
         response = session.get(url, params=parameters)
         data = json.loads(response.text)
-        sol_usd_price = data['data']["SOL"][1]['quote']['USD']['price']
-        sol_change_percent = data['data']["SOL"][1]['quote']['USD']['percent_change_24h']
+        #sol_usd_price = data['data']["SOL"][1]['quote']['USD']['price']
+        #sol_change_percent = data['data']["SOL"][1]['quote']['USD']['percent_change_24h']
 
         return 190,4
         #return round(sol_usd_price, 2), round(sol_change_percent, 1)
