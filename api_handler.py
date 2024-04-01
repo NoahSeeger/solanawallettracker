@@ -69,28 +69,28 @@ def convert_solana_to_usd(amount):
         return e
 
 
-# def get_solana_price():
-#     url = 'https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest'
+def get_solana_price():
+    url = 'https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest'
 
-#     parameters = {
-#     'symbol': 'SOL',
-#     }
+    parameters = {
+    'symbol': 'SOL',
+    }
 
-#     headers = {
-#     'Accepts': 'application/json',
-#     'X-CMC_PRO_API_KEY': CMC_API_KEY,
-#     }
+    headers = {
+    'Accepts': 'application/json',
+    'X-CMC_PRO_API_KEY': CMC_API_KEY,
+    }
 
-#     session = Session()
-#     session.headers.update(headers)
+    session = Session()
+    session.headers.update(headers)
 
-#     try:
-#         response = session.get(url, params=parameters)
-#         data = json.loads(response.text)
-#         sol_usd_price = data['data']["SOL"][1]['quote']['USD']['price']
-#         sol_change_percent = data['data']["SOL"][1]['quote']['USD']['percent_change_24h']
+    try:
+        response = session.get(url, params=parameters)
+        data = json.loads(response.text)
+        sol_usd_price = data['data']["SOL"][1]['quote']['USD']['price']
+        sol_change_percent = data['data']["SOL"][1]['quote']['USD']['percent_change_24h']
 
-#         pprint.pprint(data)
-#         return round(sol_usd_price, 2), round(sol_change_percent, 1)
-#     except (ConnectionError, Timeout, TooManyRedirects) as e:
-#         return 0
+        return 190,4
+        return round(sol_usd_price, 2), round(sol_change_percent, 1)
+    except (ConnectionError, Timeout, TooManyRedirects) as e:
+        return 0
