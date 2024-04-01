@@ -91,6 +91,6 @@ def get_solana_price():
         sol_change_percent = data['data']["SOL"][1]['quote']['USD']['percent_change_24h']
 
         return 190,4
-        return round(sol_usd_price, 2), round(sol_change_percent, 1)
+        #return round(sol_usd_price, 2), round(sol_change_percent, 1)
     except (ConnectionError, Timeout, TooManyRedirects) as e:
         return 0
