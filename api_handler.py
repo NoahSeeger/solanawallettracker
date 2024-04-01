@@ -3,6 +3,7 @@ import os
 import json
 from requests import Request, Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
+import pprint
 
 from moralis import sol_api
 
@@ -86,10 +87,12 @@ def get_solana_price():
     try:
         response = session.get(url, params=parameters)
         data = json.loads(response.text)
-        sol_usd_price = data['data']["SOL"][0]['quote']['USD']['price']
-        sol_change_percent = data['data']["SOL"][0]['quote']['USD']['percent_change_24h']
+        sol_usd_price = data['data']["SOL"][1]['quote']['USD']['price']
+        sol_change_percent = data['data']["SOL"][1]['quote']['USD']['percent_change_24h']
 
+        pprint.pprint(data)
         return round(sol_usd_price, 2), round(sol_change_percent, 1)
     except (ConnectionError, Timeout, TooManyRedirects) as e:
         return 0
     
+get_solana_price()
