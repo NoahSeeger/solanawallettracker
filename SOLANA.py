@@ -7,13 +7,13 @@
 streamlit run f:/Programmieren/Python/SolanaTracker/SOLANA.py
 '''
 
+import api_handler
 import streamlit as st
-import moralis
 import time
 
-import api_handler
+time.sleep(2)
 
-total_portfolio_value_usd = 0  # Variable, um den gesamten Wert des Portfolios zu speichern
+total_portfolio_value_usd = 0
 
 sol_blc = "0.00"
 usd_blc = "0.00"
