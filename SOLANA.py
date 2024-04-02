@@ -22,6 +22,8 @@ usd_blc = "0.00"
 
 solana_price, solana_24h_change = api_handler.get_solana_price()
 
+def on_select_change():
+   wallet = wallet_select
 
 st.set_page_config(page_title="SolanaTracker", page_icon=":zany_face:", layout="wide")
 
@@ -29,16 +31,16 @@ st.metric("Solana-Price",f"${solana_price}",f"{solana_24h_change}%")
 
 st.title("Solana Wallet Tracker")
 
-selected_tab = st.session_state.get("selected_tab", 1)  # Standardwert ist Tab 1
-
-tab1,tab2 = st.tabs(["Input Address", "Select from Data"])
-
-with tab1:
+col1, col2= st.columns(2)
+with col1:
    wallet = st.text_input(label="Wallet-Adress",placeholder="e.g. 71WDyyCsZwyEYDV91Qrb212rdg6woCHYQhFnmZUBxiJ6", max_chars=50, disabled=False)
-   button = st.button("Search 🔍")
-with tab2:
-   wallet_select = st.selectbox('Select from saved Addresses', api_handler.get_wallet_addresses(), index=None)
-   button = st.button("Search 🔎")
+
+with col2:
+   wallet_select = st.selectbox('Select from saved Addresses', api_handler.get_wallet_addresses(), index=None, on_change=on_select_change())
+
+
+button = st.button("Search 🔍")
+
 
 
 if button:
