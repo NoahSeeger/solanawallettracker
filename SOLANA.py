@@ -83,13 +83,17 @@ st.subheader("Total Value")
 st.header(f"${total_wallet_value_usd}")
 
 wallet_name = st.text_input(label="Wallet-Name",placeholder="e.g. Hoss", max_chars=15, disabled=False)
-if st.button("Upload to Datasheet :file_cabinet:"):
+uploadButton = st.button("Upload to Datasheet :file_cabinet:")
+
+if uploadButton:
    if wallet != "" and len(wallet) >= 20:
-      if wallet_name == "":
-         wallet_name = "Empty"
       total_wallet_value_usd = round(total_portfolio_value_usd + float(usd_blc),2)
-      api_handler.upload_wallet(wallet_name,wallet,total_wallet_value_usd)
-      st.toast(body="Portfolio Sucessfully uploaded to Datasheet...", icon="✅") 
+      if total_portfolio_value_usd > 0:   
+         api_handler.upload_wallet(wallet_name,wallet,total_wallet_value_usd)
+         st.toast(body="Portfolio Sucessfully uploaded to Datasheet...", icon="✅") 
+      else:
+         st.toast(body="Error uploading. Try againd...", icon="❌") 
+         
 
 st.write("""
   <style>
