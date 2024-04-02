@@ -38,7 +38,10 @@ with col2:
 
 button = st.button("Search 🔍")
 
-
+if wallet_select != None:
+   wallet.disabled = True
+else:
+   wallet.disabled = False
 
 
 if button:
@@ -100,8 +103,11 @@ uploadButton = st.button("Upload to Datasheet :file_cabinet:")
 
 if uploadButton:
    if wallet != "" and len(wallet) >= 20:
-      api_handler.upload_wallet(wallet_name, total_wallet_value_usd, wallet)
-      st.toast(body="Portfolio Sucessfully uploaded to Datasheet...", icon="✅") 
+      if len(wallet_name) >= 1:
+         api_handler.upload_wallet(wallet_name, total_wallet_value_usd, wallet)
+         st.toast(body="Portfolio Sucessfully uploaded to Datasheet...", icon="✅")
+      else: 
+         st.toast(body="Name too short...", icon="❌")
 
 st.write("""
   <style>
