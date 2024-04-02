@@ -67,7 +67,7 @@ if button:
                   st.header(f"{token['name']} - ${round(position_value_usd, 2)}")
                   st.write(f'{formatted_amount} {token["symbol"]}')
                with col2:
-                  st.write(f"[DexScreener](https://dexscreener.com/solana/{token['mint']})")
+                  st.write(f"[DexScreener](https://dexscreener.com/solana/{token['mint']}?maker={wallet})")
                st.write('<span class="red-frame"/>', unsafe_allow_html=True)
 
          st.toast(body="Portfolio Sucessfully loaded...", icon="✅") 
