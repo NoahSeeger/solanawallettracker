@@ -29,12 +29,26 @@ st.metric("Solana-Price",f"${solana_price}",f"{solana_24h_change}%")
 
 st.title("Solana Wallet Tracker")
 
+tabs = st.radio("Choose input method:", ("Enter value", "Select from options"))
+if tabs == "Enter value":
+    selected_tab = "Enter value"
+else:
+    selected_tab = "Select from options"
+
+if selected_tab == "Enter value":
+    user_input = st.text_input("Enter your value:")
+    selected_option = None
+else:
+    dropdown_options = ["Option 1", "Option 2", "Option 3"]
+    selected_option = st.selectbox("Select an option:", options=dropdown_options)
+    user_input = None
+
 col1, col2= st.columns(2)
 with col1:
    wallet = st.text_input(label="Wallet-Adress",placeholder="e.g. 71WDyyCsZwyEYDV91Qrb212rdg6woCHYQhFnmZUBxiJ6", max_chars=50, disabled=False)
 
 with col2:
-   st.selectbox('Select from saved Addresses', api_handler.get_wallet_addresses(), index=None)
+   wallet_select = st.selectbox('Select from saved Addresses', api_handler.get_wallet_addresses(), index=None)
 
 button = st.button("Search 🔍")
 
