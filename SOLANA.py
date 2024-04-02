@@ -34,6 +34,7 @@ with col1:
 
 with col2:
    wallet_select = st.selectbox('Select from saved Addresses', api_handler.get_wallet_names(), index=None)
+   st.caption("This will be prioritized")
 
 
 button = st.button("Search 🔍")
