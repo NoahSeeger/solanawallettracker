@@ -22,8 +22,8 @@ usd_blc = "0.00"
 
 solana_price, solana_24h_change = api_handler.get_solana_price()
 
-def on_select_change():
-   wallet = wallet_select
+def on_select_change(option):
+   wallet = option
 
 st.set_page_config(page_title="SolanaTracker", page_icon=":zany_face:", layout="wide")
 
