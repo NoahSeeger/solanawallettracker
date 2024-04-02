@@ -32,14 +32,16 @@ st.title("Solana Wallet Tracker")
 tab1,tab2 = st.tabs(["Input Address", "Select from Data"])
 
 with tab1:
+   selected_tab = 1
    wallet = st.text_input(label="Wallet-Adress",placeholder="e.g. 71WDyyCsZwyEYDV91Qrb212rdg6woCHYQhFnmZUBxiJ6", max_chars=50, disabled=False)
 
 with tab2:
+   selected_tab = 2
    wallet_select = st.selectbox('Select from saved Addresses', api_handler.get_wallet_addresses(), index=None)
 
 button = st.button("Search 🔍")
 
-if tab1:
+if selected_tab == 1:
    st.write("TAB 1")
 else:
    st.write("TAB NOT")
