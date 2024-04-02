@@ -29,6 +29,8 @@ st.metric("Solana-Price",f"${solana_price}",f"{solana_24h_change}%")
 
 st.title("Solana Wallet Tracker")
 
+selected_tab = st.session_state.get("selected_tab", 1)  # Standardwert ist Tab 1
+
 tab1,tab2 = st.tabs(["Input Address", "Select from Data"])
 
 with tab1:
