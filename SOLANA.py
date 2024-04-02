@@ -22,6 +22,7 @@ usd_blc = "0.00"
 
 solana_price, solana_24h_change = api_handler.get_solana_price()
 
+
 st.set_page_config(page_title="SolanaTracker", page_icon=":zany_face:", layout="wide")
 
 st.metric("Solana-Price",f"${solana_price}",f"{solana_24h_change}%")
@@ -33,7 +34,7 @@ with col1:
    wallet = st.text_input(label="Wallet-Adress",placeholder="e.g. 71WDyyCsZwyEYDV91Qrb212rdg6woCHYQhFnmZUBxiJ6", max_chars=50, disabled=False)
 
 with col2:
-   st.selectbox('Select from saved Addresses', api_handler.get_wallet_addresses())
+   st.selectbox('Select from saved Addresses', api_handler.get_wallet_addresses(), index=None)
 
 button = st.button("Search 🔍")
 
