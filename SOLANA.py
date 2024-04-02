@@ -15,6 +15,7 @@ import time
 import api_handler
 
 total_portfolio_value_usd = 0
+total_wallet_value_usd = 0
 
 sol_blc = "0.00"
 usd_blc = "0.00"
