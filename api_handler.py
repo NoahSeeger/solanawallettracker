@@ -4,13 +4,15 @@ import json
 from requests import Request, Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import pprint
-
+import streamlit as st
 from moralis import sol_api
 
-load_dotenv()
+# load_dotenv()
+# MORALIS_API_KEY = os.getenv('MORALIS_API_KEY')
+# CMC_API_KEY = os.getenv('CMC_API_KEY')
 
-MORALIS_API_KEY = os.getenv('MORALIS_API_KEY')
-CMC_API_KEY = os.getenv('CMC_API_KEY')
+MORALIS_API_KEY = st.secrets['MORALIS_API_KEY']
+CMC_API_KEY = st.secrets['CMC_API_KEY']
 
 
 
@@ -87,10 +89,10 @@ def get_solana_price():
     try:
         response = session.get(url, params=parameters)
         data = json.loads(response.text)
-        #sol_usd_price = data['data']["SOL"][1]['quote']['USD']['price']
-        #sol_change_percent = data['data']["SOL"][1]['quote']['USD']['percent_change_24h']
+        sol_usd_price = data['data']["SOL"][1]['quote']['USD']['price']
+        sol_change_percent = data['data']["SOL"][1]['quote']['USD']['percent_change_24h']
 
-        return 190,4
-        #return round(sol_usd_price, 2), round(sol_change_percent, 1)
+
+        return round(sol_usd_price, 2), round(sol_change_percent, 1)
     except (ConnectionError, Timeout, TooManyRedirects) as e:
         return 0
