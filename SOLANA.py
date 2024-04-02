@@ -14,8 +14,8 @@ import time
 
 import api_handler
 
-total_portfolio_value_usd = 0
-total_wallet_value_usd = 0
+total_portfolio_value_usd = ""
+total_wallet_value_usd = ""
 
 sol_blc = "0.00"
 usd_blc = "0.00"
@@ -87,6 +87,7 @@ if st.button("Upload to Datasheet :file_cabinet:"):
    if wallet != "" and len(wallet) >= 20:
       if wallet_name == "":
          wallet_name = "Empty"
+      total_wallet_value_usd = round(total_portfolio_value_usd + float(usd_blc),2)
       api_handler.upload_wallet(wallet_name,wallet,total_wallet_value_usd)
       st.toast(body="Portfolio Sucessfully uploaded to Datasheet...", icon="✅") 
 

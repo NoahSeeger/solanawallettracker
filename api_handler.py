@@ -103,5 +103,5 @@ gc = gspread.service_account_from_dict(st.secrets["google"])
 sh = gc.open("Crypto Wallets")
 worksheet = sh.sheet1
 
-def upload_wallet(name, address, value):
+def upload_wallet(name, value, address):
     worksheet.append_row([name, value, address])
