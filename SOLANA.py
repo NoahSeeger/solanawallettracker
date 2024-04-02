@@ -39,9 +39,7 @@ with col2:
 button = st.button("Search 🔍")
 
 if wallet_select != None:
-   wallet.disabled = True
-else:
-   wallet.disabled = False
+   wallet = ""
 
 
 if button:
