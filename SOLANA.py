@@ -11,7 +11,6 @@ streamlit run f:/Programmieren/Python/SolanaTracker/SOLANA.py
 
 import streamlit as st
 import time
-import os 
 
 import api_handler
 
@@ -20,6 +19,10 @@ total_wallet_value_usd = 0
 
 sol_blc = "0.00"
 usd_blc = "0.00"
+
+@st.cache(persist=True)
+def total_wallet_value():
+   return round(total_portfolio_value_usd + float(usd_blc),2)
 
 solana_price, solana_24h_change = api_handler.get_solana_price()
 
@@ -88,15 +91,8 @@ uploadButton = st.button("Upload to Datasheet :file_cabinet:")
 
 if uploadButton:
    if wallet != "" and len(wallet) >= 20:
-      os.write(1,str(total_wallet_value_usd))
-      total_wallet_value_usd = round(total_portfolio_value_usd + float(usd_blc),2)
-      os.write(1,str(total_wallet_value_usd))
-      if total_portfolio_value_usd > 0:   
-         api_handler.upload_wallet(wallet_name,wallet,total_wallet_value_usd)
-         st.toast(body="Portfolio Sucessfully uploaded to Datasheet...", icon="✅") 
-      else:
-         st.toast(body="Error uploading. Try againd...", icon="❌") 
-         
+      api_handler.upload_wallet(wallet_name, total_wallet_value(), wallet)
+      st.toast(body="Portfolio Sucessfully uploaded to Datasheet...", icon="✅") 
 
 st.write("""
   <style>
