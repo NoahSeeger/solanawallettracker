@@ -38,7 +38,7 @@ with tab1:
    button = st.button("Search 🔍")
 with tab2:
    wallet_select = st.selectbox('Select from saved Addresses', api_handler.get_wallet_addresses(), index=None)
-   button = st.button("Search 🔍")
+   button = st.button("Search 🔎")
 
 
 if button:
