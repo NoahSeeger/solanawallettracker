@@ -106,7 +106,16 @@ worksheet = sh.sheet1
 def upload_wallet(name, value, address):
     worksheet.append_row([name, value, address])
 
-def get_wallet_addresses():
+def get_wallet_names():
     addresses = worksheet.col_values(1)
     addresses = addresses[1:]
     return addresses
+
+def get_wallet_address(name):
+    names = worksheet.col_values(1)[1:]
+    addresses = worksheet.col_values(3)[1:]
+    try:
+        index = names.index(name)
+        return addresses[index]
+    except ValueError:
+        return "Address not found for the given name"
