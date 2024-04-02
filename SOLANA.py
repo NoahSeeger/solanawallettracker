@@ -3,6 +3,7 @@
 - https://www.webfx.com/tools/emoji-cheat-sheet/ Use this page for picking emoji
 - API for Portfolio Analysis from here: https://admin.moralis.io/settings
 - API for Crypto Price Checking from here: https://pro.coinmarketcap.com/account/
+- python -m pip freeze > requirements.txt
 
 streamlit run f:/Programmieren/Python/SolanaTracker/SOLANA.py
 '''
