@@ -71,6 +71,7 @@ if button:
                   st.write(f"[DexScreener](https://dexscreener.com/solana/{token['mint']}?maker={wallet})")
                st.write('<span class="red-frame"/>', unsafe_allow_html=True)
 
+         total_wallet_value_usd = round(total_portfolio_value_usd + float(usd_blc),2)
          st.toast(body="Portfolio Sucessfully loaded...", icon="✅") 
 
 st.subheader("USD:")
@@ -78,14 +79,14 @@ st.header(f"${round(total_portfolio_value_usd, 2)}")
 
 st.divider()
 st.subheader("Total Value")
-st.header(f"${total_portfolio_value_usd + float(usd_blc)}")
+st.header(f"${total_wallet_value_usd}")
 
 wallet_name = st.text_input(label="Wallet-Name",placeholder="e.g. Hoss", max_chars=15, disabled=False)
 if st.button("Upload to Datasheet :file_cabinet:"):
    if wallet != "" and len(wallet) >= 20:
       if wallet_name == "":
          wallet_name = "Empty"
-      api_handler.upload_wallet(wallet_name,wallet,total_portfolio_value_usd)
+      api_handler.upload_wallet(wallet_name,wallet,total_wallet_value_usd)
       st.toast(body="Portfolio Sucessfully uploaded to Datasheet...", icon="✅") 
 
 st.write("""
