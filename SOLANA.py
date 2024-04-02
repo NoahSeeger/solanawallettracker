@@ -20,10 +20,6 @@ total_wallet_value_usd = 0
 sol_blc = "0.00"
 usd_blc = "0.00"
 
-@st.cache(persist=True)
-def total_wallet_value():
-   return round(total_portfolio_value_usd + float(usd_blc),2)
-
 solana_price, solana_24h_change = api_handler.get_solana_price()
 
 st.set_page_config(page_title="SolanaTracker", page_icon=":zany_face:", layout="wide")
@@ -32,7 +28,13 @@ st.metric("Solana-Price",f"${solana_price}",f"{solana_24h_change}%")
 
 st.title("Solana Wallet Tracker")
 
-wallet = st.text_input(label="Wallet-Adress",placeholder="e.g. 71WDyyCsZwyEYDV91Qrb212rdg6woCHYQhFnmZUBxiJ6", max_chars=50, disabled=False)
+col1, col2= st.columns(2)
+with col1:
+   wallet = st.text_input(label="Wallet-Adress",placeholder="e.g. 71WDyyCsZwyEYDV91Qrb212rdg6woCHYQhFnmZUBxiJ6", max_chars=50, disabled=False)
+
+with col2:
+   st.selectbox('Select from saved Addresses', api_handler.get_wallet_addresses())
+
 button = st.button("Search 🔍")
 
 if button:
@@ -91,7 +93,7 @@ uploadButton = st.button("Upload to Datasheet :file_cabinet:")
 
 if uploadButton:
    if wallet != "" and len(wallet) >= 20:
-      api_handler.upload_wallet(wallet_name, total_wallet_value(), wallet)
+      api_handler.upload_wallet(wallet_name, total_wallet_value_usd, wallet)
       st.toast(body="Portfolio Sucessfully uploaded to Datasheet...", icon="✅") 
 
 st.write("""

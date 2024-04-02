@@ -105,3 +105,8 @@ worksheet = sh.sheet1
 
 def upload_wallet(name, value, address):
     worksheet.append_row([name, value, address])
+
+def get_wallet_addresses():
+    addresses = worksheet.col_values(1)
+    addresses = addresses[1:]
+    return addresses
