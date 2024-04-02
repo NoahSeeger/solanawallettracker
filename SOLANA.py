@@ -8,11 +8,11 @@
 streamlit run f:/Programmieren/Python/SolanaTracker/SOLANA.py
 '''
 
-import api_handler
+
 import streamlit as st
 import time
 
-time.sleep(2)
+import api_handler
 
 total_portfolio_value_usd = 0
 
@@ -52,7 +52,7 @@ st.divider()
 st.subheader("Tokens:")
 
 if button:
-    if wallet != "" and len(wallet) >= 5:
+    if wallet != "" and len(wallet) >= 20:
         with st.spinner('Wait for it...'):
          for token in tokens:
             formatted_amount = '{:,}'.format(round(float(token['amount'])))
@@ -80,6 +80,13 @@ st.divider()
 st.subheader("Total Value")
 st.header(f"${total_portfolio_value_usd + float(usd_blc)}")
 
+wallet_name = st.text_input(label="Wallet-Name",placeholder="e.g. Hoss", max_chars=15, disabled=False)
+if st.button("Upload to Datasheet :file_cabinet:"):
+   if wallet != "" and len(wallet) >= 20:
+      if wallet_name == "":
+         wallet_name = "Empty"
+      api_handler.upload_wallet(wallet_name,wallet,total_portfolio_value_usd)
+      st.toast(body="Portfolio Sucessfully uploaded to Datasheet...", icon="✅") 
 
 st.write("""
   <style>

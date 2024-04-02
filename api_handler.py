@@ -6,6 +6,7 @@ from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import pprint
 import streamlit as st
 from moralis import sol_api
+import gspread
 
 # load_dotenv()
 # MORALIS_API_KEY = os.getenv('MORALIS_API_KEY')
@@ -96,3 +97,11 @@ def get_solana_price():
         return round(sol_usd_price, 2), round(sol_change_percent, 1)
     except (ConnectionError, Timeout, TooManyRedirects) as e:
         return 0
+
+
+gc = gspread.service_account_from_dict(st.secrets["google"])
+sh = gc.open("Crypto Wallets")
+worksheet = sh.sheet1
+
+def upload_wallet(name, address, value):
+    worksheet.append_row([name, value, address])
