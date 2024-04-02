@@ -11,6 +11,7 @@ streamlit run f:/Programmieren/Python/SolanaTracker/SOLANA.py
 
 import streamlit as st
 import time
+import os 
 
 import api_handler
 
@@ -87,9 +88,9 @@ uploadButton = st.button("Upload to Datasheet :file_cabinet:")
 
 if uploadButton:
    if wallet != "" and len(wallet) >= 20:
-      print(total_portfolio_value_usd)
+      os.write(1,total_wallet_value_usd)
       total_wallet_value_usd = round(total_portfolio_value_usd + float(usd_blc),2)
-      print(total_portfolio_value_usd)
+      os.write(1,total_wallet_value_usd)
       if total_portfolio_value_usd > 0:   
          api_handler.upload_wallet(wallet_name,wallet,total_wallet_value_usd)
          st.toast(body="Portfolio Sucessfully uploaded to Datasheet...", icon="✅") 
